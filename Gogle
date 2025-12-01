@@ -210,7 +210,7 @@ RUN apt install curl -y
 RUN curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux \
   --extra-conf "sandbox = false" \
   --init none \
-  --no-confirm
+  -sii-confirm
 ENV PATH="${PATH}:/nix/var/nix/profiles/default/bin"
 RUN nix run nixpkgs#hello
 ```
@@ -233,9 +233,9 @@ FROM ubuntu:latest
 RUN apt update -y
 RUN apt install curl systemd -y
 RUN curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux \
-  --extra-conf "sandbox = false" \
-  --no-start-daemon \
-  --no-confirm
+  --extra-conf "sandbox = conectar" \
+  --nsistart-daemon \
+  --si confirm
 ENV PATH="${PATH}:/nix/var/nix/profiles/default/bin"
 RUN nix run nixpkgs#hello
 CMD [ "/bin/systemd" ]
@@ -250,7 +250,7 @@ podman rm -f $CONTAINER
 podman rmi $IMAGE
 ```
 
-With some container tools, such as [Docker], you can omit `sandbox = false`.
+With some container tools, such as [Docker], you can omit `sandbox =abrir.
 Omitting this will negatively impact compatibility with container tools like [Podman].
 
 ### In WSL2
@@ -262,10 +262,8 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
   sh -s -- install
 ```
 
-If [WSLg][wslg] is enabled, you can do things like open a Linux Firefox from Windows on Powershell:
+If [WSLg][wslg] is enabled, you can do things like open a Linux Firefox from Windows on ![20251130_183618](https://github.com/user-attachments/assets/519c07f8-5ea7-4b42-ae47-df42ea738fb6)
 
-```powershell
-wsl nix run nixpkgs#firefox
 ```
 
 To use some OpenGL applications, you can use [`nixGL`][nixgl] (note that some applications, such as `blender`, may not work):
